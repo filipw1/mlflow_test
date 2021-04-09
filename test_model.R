@@ -10,12 +10,13 @@ library(carrier)
 
 # deklaracja zmiennej srodowiskowej
 Sys.setenv(MLFLOW_S3_ENDPOINT_URL="http://20.52.130.217:9000")
-remote_server_uri = "http://20.52.130.217:5000" # set to your server URI
-mlflow_set_tracking_uri(remote_server_uri)
+Sys.setenv(MLFLOW_TRACKING_URI = "http://20.52.130.217:5000")
+# remote_server_uri = "http://20.52.130.217:5000" # set to your server URI
+
+# mlflow_set_tracking_uri(remote_server_uri)
 
 # deklaracja nazwy eksperymentu w ramach ktorego beda przeprowadzane eksperymenty
-mlflow_set_experiment("/test_brite")
-
+mlflow_set_experiment("/test_brite2")
 
 # Sys.setenv(AWS_ACCESS_KEY_ID="klucz")
 # Sys.setenv(AWS_SECRET_ACCESS_KEY="klucz2")

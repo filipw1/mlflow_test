@@ -1,0 +1,15 @@
+artifact_uri: file:///home/filip/Documents/mlflow_test/mlruns/0/a0b2369d955d4a269641efc12f07f110/artifacts
+end_time: 1618002588742
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+name: ''
+run_id: a0b2369d955d4a269641efc12f07f110
+run_uuid: a0b2369d955d4a269641efc12f07f110
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1618002585972
+status: 4
+tags: []
+user_id: filip
