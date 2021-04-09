@@ -11,7 +11,7 @@ entry_points:
       alpha: {type: float, default: 0.1}
       lambda: {type: float, default: 0.1} 
       regularization: {type: float, default: 0.1}
-    command: "Rscript python test_model.r -P alpha={alpha} lambda={lambda}"
+    command: "Rscript test_model.r -P alpha={alpha} -P lambda={lambda}"
 # validate:
 #    parameters:
 #      data_file: path
