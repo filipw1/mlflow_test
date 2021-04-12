@@ -2,7 +2,6 @@
 # P. Cortez, A. Cerdeira, F. Almeida, T. Matos and J. Reis.
 # Modeling wine preferences by data mining from physicochemical properties. In Decision Support Systems, Elsevier, 47(4):547-553, 2009.
 
-
 # biblioteki 
 library(mlflow)
 library(glmnet)
@@ -11,12 +10,12 @@ library(carrier)
 # deklaracja zmiennej srodowiskowej
 Sys.setenv(MLFLOW_S3_ENDPOINT_URL="http://20.52.130.217:9000")
 Sys.setenv(MLFLOW_TRACKING_URI = "http://20.52.130.217:5000")
-# remote_server_uri = "http://20.52.130.217:5000" # set to your server URI
 
+# remote_server_uri = "http://20.52.130.217:5000" # set to your server URI
 # mlflow_set_tracking_uri(remote_server_uri)
 
 # deklaracja nazwy eksperymentu w ramach ktorego beda przeprowadzane eksperymenty
-mlflow_set_experiment("/test_brite2")
+mlflow_set_experiment("/test_brite_2")
 
 # Sys.setenv(AWS_ACCESS_KEY_ID="klucz")
 # Sys.setenv(AWS_SECRET_ACCESS_KEY="klucz2")
@@ -38,11 +37,13 @@ train_y <- train[, "quality"]
 test_y <- test[, "quality"]
 
 # deklaracja parametrow modelu
-alpha <- mlflow_param("alpha", 0.5, "numeric")
-lambda <- mlflow_param("lambda", 0.5, "numeric")
+
 
 # Wykonanie ranu w ramach funkcji with, po zakonczeniu funkcji run zostanie automatycznie zamkniety
-with(mlflow_start_run(), {
+with(mlflow_start_run(nested = T), {
+  alpha <- mlflow_param("alpha", 0.5, "numeric")
+  lambda <- mlflow_param("lambda", 0.5, "numeric")
+  
     model <- glmnet(train_x, train_y, alpha = alpha, lambda = lambda, family= "gaussian", standardize = FALSE)
     
     # izolowanie funkcji predykcyjne, funkcja crate z pakietu carrier
@@ -63,8 +64,8 @@ with(mlflow_start_run(), {
     message("  R2: ", r2)
 
     # zapisywanie parametrow uzytych w modelu
-    mlflow_log_param("alpha", mlflow_param("alpha", 0.7))
-    mlflow_log_param("lambda", mlflow_param("lambda", 0.8))
+    mlflow_log_param("alpha", alpha)
+    mlflow_log_param("lambda", lambda)
     
     for(i in c(1:3)){
       mlflow_log_metric("moja metryka", i)
